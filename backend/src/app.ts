@@ -10,6 +10,7 @@ import productRoutes from './routes/product.route';
 import orderRoutes from './routes/order.routes';
 import { NotFoundError } from './errors';
 import errorHandler from './middleware/error-handler';
+import errorTransformer from './middleware/error-transformer';
 
 const app = express();
 const PORT = config.port;
@@ -52,6 +53,7 @@ app.use('*', (_req: Request, _res: Response, next: NextFunction) => {
   next(new NotFoundError('Маршрут не найден'));
 });
 
+app.use(errorTransformer);
 // Логгер ошибок (ПОСЛЕ роутов)
 app.use(errorLogger);
 

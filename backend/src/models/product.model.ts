@@ -1,12 +1,14 @@
 import mongoose, { Schema } from 'mongoose';
 
-export enum Category {
-  SOFT_SKILL = 'софт-скил',
-  HARD_SKILL = 'хард-скил',
-  OTHER = 'другое',
-  ADDITIONAL = 'дополнительное',
-  BUTTON = 'кнопка',
-}
+export const Categories = {
+  SOFT_SKILL: 'софт-скил',
+  HARD_SKILL: 'хард-скил',
+  OTHER: 'другое',
+  ADDITIONAL: 'дополнительное',
+  BUTTON: 'кнопка',
+} as const;
+
+export type Category = typeof Categories[keyof typeof Categories];
 
 export interface IFile {
     fileName: string;
@@ -49,7 +51,7 @@ const productSchema = new Schema<IProduct>({
   },
   category: {
     type: String,
-    enum: Object.values(Category),
+    enum: Object.values(Categories),
     required: true,
   },
   description: {

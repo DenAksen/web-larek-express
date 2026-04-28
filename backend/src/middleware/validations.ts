@@ -1,5 +1,5 @@
 import { Joi, celebrate, Segments } from 'celebrate';
-import { Category } from '../models/product.model';
+import { Categories } from '../models/product.model';
 
 export const validateCreateProduct = celebrate({
   [Segments.BODY]: Joi.object().keys({
@@ -8,7 +8,7 @@ export const validateCreateProduct = celebrate({
       fileName: Joi.string().required(),
       originalName: Joi.string().required(),
     }).required(),
-    category: Joi.string().valid(...Object.values(Category)).required(),
+    category: Joi.string().valid(...Object.values(Categories)).required(),
     description: Joi.string().optional().allow(''),
     price: Joi.number().optional().allow(null),
   }),
